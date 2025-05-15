@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "687166673513",
+    "project_id": "loginfuncional2-26842fd2",
+    "storage_bucket": "loginfuncional2-26842fd2.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:687166673513:android:dc52b39fc4832d31eb88f8",
+        "android_client_info": {
+          "package_name": "com.loginfuncional"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBrz4Ueq-KKshws3Q2p-5XLyTZAegOvlmU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
