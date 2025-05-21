@@ -108,6 +108,8 @@ class RegisterActivity : AppCompatActivity() {
                 val nuevoUsuario = Usuario(nombre = nombre, email = email, password = password)
                 usuarioDao.insertar(nuevoUsuario)
                 withContext(Dispatchers.Main) {
+                    val sessionManager = SessionManager(this@RegisterActivity)
+                    sessionManager.saveToken(email)
                     Toast.makeText(applicationContext, "Registro exitoso", Toast.LENGTH_SHORT).show()
                     goToLogin()
                 }

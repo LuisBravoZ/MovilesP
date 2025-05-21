@@ -2,12 +2,18 @@ package com.example.loginfuncional2.database
 
 import androidx.room.Database
 import androidx.room.RoomDatabase
+import com.example.loginfuncional2.dao.CitaDao
+import com.example.loginfuncional2.dao.TurnoDao
 import com.example.loginfuncional2.dao.UsuarioDao
+import com.example.loginfuncional2.model.Cita
+import com.example.loginfuncional2.model.Turno
 import com.example.loginfuncional2.model.Usuario
 
-@Database(entities = [Usuario::class], version = 1, exportSchema = false)
+@Database(entities = [Usuario::class, Cita::class, Turno ::class], version = 3, exportSchema = false)
 abstract class AppDatabase : RoomDatabase(){
     abstract fun usuarioDao(): UsuarioDao //metdo adbtracto que permite acceder a las operaciones definidas en un usuario dao
+    abstract fun citaDao(): CitaDao
+    abstract fun turnoDao(): TurnoDao
 
     companion object {
         @Volatile
@@ -19,7 +25,9 @@ abstract class AppDatabase : RoomDatabase(){
                     context.applicationContext,
                     AppDatabase::class.java,
                     "tierra.db"
-                ).build()
+                )
+                    .fallbackToDestructiveMigration()
+                    .build()
                 INSTANCE = instance
                 instance
             }

@@ -24,7 +24,15 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        val sessionManager = SessionManager(this)
 
+        if (sessionManager.isLoggedIn()) {
+            // Ir directamente al menú si ya hay sesión
+
+            startActivity(Intent(this, MenuActivity::class.java))
+            finish()
+            return
+        }
         etEmail = findViewById(R.id.etEmail)
         etPassword = findViewById(R.id.etPassword)
         btniniciosesion = findViewById(R.id.btniniciosesion)
@@ -60,7 +68,9 @@ class MainActivity : AppCompatActivity() {
             val usuario = usuarioDao.login(correo, password)
             withContext(Dispatchers.Main) {
                 if (usuario != null) {
-
+                    val sessionManager = SessionManager(this@MainActivity)
+                    sessionManager.saveToken(correo)
+                    sessionManager.saveUserId(usuario.id)
                     Toast.makeText(applicationContext, "Inicio de sesión exitoso", Toast.LENGTH_SHORT).show()
                     goToMenu()
                 } else {
