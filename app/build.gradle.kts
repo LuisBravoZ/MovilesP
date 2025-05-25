@@ -38,6 +38,7 @@ android {
 }
 
 dependencies {
+    implementation(libs.jbcrypt)
     implementation(libs.androidx.room.runtime)//definimos room para manejo de bd local
     implementation(libs.androidx.room.ktx) //definimos para q kotlin maneje sub rutinas
     kapt(libs.androidx.room.compiler)//genera codigo de bd

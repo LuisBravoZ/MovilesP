@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp">
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:orientation="vertical">
+    <TextView
+        android:id="@+id/tv_titulo"
+        android:gravity="center"
+        android:textStyle="bold"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Generar Horarios"
+        android:textSize="30sp"
+        android:padding="15dp"/>
+    <!-- Fecha de inicio -->
+    <TextView
+        android:id="@+id/tv_fecha_inicio"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Fecha de inicio"
+        android:textSize="16sp"
+        android:padding="12dp"/>
+
+    <EditText
+        android:id="@+id/et_fecha_inicio"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:focusable="false"
+        android:hint="DD/MM/YY"
+        android:inputType="none"
+        android:padding="12dp"/>
+
+    <!-- Fecha de fin -->
+    <TextView
+        android:id="@+id/tv_fecha_fin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Fecha de fin"
+        android:textSize="16sp"
+        android:padding="12dp"/>
+
+    <EditText
+        android:id="@+id/et_fecha_fin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:focusable="false"
+        android:hint="DD/MM/YY"
+        android:inputType="none"
+        android:padding="12dp"
+        />
+
+    <!-- Hora de inicio del turno -->
+    <TextView
+        android:id="@+id/tv_hora_inicio"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Hora de inicio del turno"
+        android:textSize="16sp"
+        android:padding="12dp"/>
+
+    <EditText
+        android:id="@+id/et_hora_inicio"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:focusable="false"
+        android:hint="HH:MM"
+        android:inputType="none"
+        android:padding="12dp"/>
+
+    <!-- Hora de fin del turno -->
+    <TextView
+        android:id="@+id/tv_hora_fin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Hora de fin del turno"
+        android:textSize="16sp"
+        android:padding="12dp"/>
+
+    <EditText
+        android:id="@+id/et_hora_fin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:focusable="false"
+        android:hint="HH:MM"
+        android:inputType="none"
+        android:padding="12dp"/>
+
+    <!-- Hora de inicio descanso -->
+
+    <TextView
+        android:id="@+id/tv_descanso_inicio"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="12dp"
+        android:text="Inicio descanso"
+        android:textSize="16sp" />
+
+    <EditText
+        android:id="@+id/et_descanso_inicio"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:focusable="false"
+        android:hint="HH:MM"
+        android:inputType="none"
+        android:padding="12dp"/>
+
+    <!-- Hora de fin descanso -->
+    <TextView
+        android:id="@+id/tv_descanso_fin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Fin descanso"
+        android:textSize="16sp"
+        android:padding="12dp"/>
+
+    <EditText
+        android:id="@+id/et_descanso_fin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:focusable="false"
+        android:hint="HH:MM"
+        android:inputType="none"
+        android:padding="12dp"/>
+
+    <!-- Botón generar horarios -->
+    <Button
+        android:id="@+id/btn_generar_horarios"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="Generar Horarios"
+        android:padding="12dp"
+        android:layout_marginTop="16dp"/>
+</LinearLayout>
+</ScrollView>

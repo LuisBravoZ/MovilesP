@@ -43,6 +43,7 @@
             <TextView
                 android:text="@string/campo_nombre"
                 android:textStyle="bold"
+                android:textColor="@color/black"
                 android:textSize="18sp"
                 android:layout_marginStart="10dp"
                 android:layout_marginEnd="10dp"
@@ -53,6 +54,7 @@
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/tilNombre"
                 android:hint="@string/campo_nombre_hint"
+                android:textColorHint="@color/gray"
                 android:layout_marginStart="10dp"
                 android:layout_marginEnd="10dp"
                 android:layout_marginBottom="10dp"
@@ -71,6 +73,7 @@
             <TextView
                 android:text="@string/campo_correo"
                 android:textStyle="bold"
+                android:textColor="@color/black"
                 android:textSize="18sp"
                 android:layout_marginStart="10dp"
                 android:layout_marginEnd="10dp"
@@ -81,6 +84,7 @@
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/tilEmail"
                 android:hint="@string/campo_correo_hint"
+                android:textColorHint="@color/gray"
                 android:layout_marginStart="10dp"
                 android:layout_marginEnd="10dp"
                 android:layout_marginBottom="10dp"
@@ -99,6 +103,7 @@
             <TextView
                 android:text="@string/campo_contrasena"
                 android:textStyle="bold"
+                android:textColor="@color/black"
                 android:textSize="18sp"
                 android:layout_marginStart="10dp"
                 android:layout_marginEnd="10dp"
@@ -109,12 +114,14 @@
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/tilPassword"
                 android:hint="@string/campo_contrasena_hint"
+                android:textColorHint="@color/gray"
                 android:layout_marginStart="10dp"
                 android:layout_marginEnd="10dp"
                 android:layout_marginBottom="10dp"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                app:endIconMode="password_toggle">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/etPassword"
@@ -128,6 +135,7 @@
             <TextView
                 android:text="@string/campo_contrasena2"
                 android:textStyle="bold"
+                android:textColor="@color/black"
                 android:textSize="18sp"
                 android:layout_marginStart="10dp"
                 android:layout_marginEnd="10dp"
@@ -138,12 +146,14 @@
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/tilPassword2"
                 android:hint="@string/campo_contrasena2_hint"
+                android:textColorHint="@color/gray"
                 android:layout_marginStart="10dp"
                 android:layout_marginEnd="10dp"
                 android:layout_marginBottom="10dp"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                app:endIconMode="password_toggle">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/etPassword2"

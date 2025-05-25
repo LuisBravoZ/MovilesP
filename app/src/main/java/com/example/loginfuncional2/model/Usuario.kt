@@ -2,6 +2,7 @@ package com.example.loginfuncional2.model
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import com.google.android.material.color.ColorRoles
 
 @Entity(tableName = "usuarios")
 data class Usuario(
@@ -10,6 +11,6 @@ data class Usuario(
     val nombre: String,
     val email: String,
     val password: String,
-
+    val rol: String
 
     )

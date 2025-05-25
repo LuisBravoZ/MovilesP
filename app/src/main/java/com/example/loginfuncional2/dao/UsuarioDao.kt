@@ -3,6 +3,7 @@ package com.example.loginfuncional2.dao
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
+import androidx.room.Update
 import com.example.loginfuncional2.model.Usuario
 import kotlinx.coroutines.flow.Flow
 
@@ -29,5 +30,17 @@ interface UsuarioDao{
     @Query("DELETE FROM usuarios WHERE id = :id")
     suspend fun eliminarUsuario(id: Int)
 
+    // NUEVO: obtener usuarios que no sean administradores
+    @Query("SELECT * FROM usuarios WHERE rol != 'Admin'")
+    fun obtenerUsuariosNoAdmin(): Flow<List<Usuario>>
 
+    // NUEVO: eliminar usuario por id (alias para claridad)
+    @Query("DELETE FROM usuarios WHERE id = :id")
+    suspend fun eliminarPorId(id: Int)
+
+    @Query("SELECT * FROM usuarios WHERE id = :userId LIMIT 1")
+    suspend fun obtenerUsuarioPorId(userId: Int): Usuario?
+
+    @Update
+    suspend fun actualizar(usuario: Usuario)
 }

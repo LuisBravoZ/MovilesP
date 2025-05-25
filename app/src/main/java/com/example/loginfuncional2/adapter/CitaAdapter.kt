@@ -1,10 +1,11 @@
-package com.example.loginfuncional2
+package com.example.loginfuncional2.adapter
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.example.loginfuncional2.R
 import com.example.loginfuncional2.model.Cita
 
 class CitaAdapter(private val citas: List<Cita>) : RecyclerView.Adapter<CitaAdapter.CitaViewHolder>() {
