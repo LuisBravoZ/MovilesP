@@ -38,5 +38,16 @@ class SessionManager(context: Context) {
     fun getUserRole(): String? {
         return prefs.getString("user_role", null)
     }
-
+    fun saveUserName(name: String) {
+        prefs.edit().putString("user_name", name).apply()
+    }
+    fun getUserName(): String? {
+        return prefs.getString("user_name", null)
+    }
+    fun getUserEmail(): String? {
+        return prefs.getString("email", null)
+    }
+    fun saveUserEmail(email: String) {
+        prefs.edit().putString("email", email).apply()
+    }
 }

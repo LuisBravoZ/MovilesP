@@ -10,7 +10,7 @@
     <string name="campo_contrasena_hint">Ingrese su contraseña</string>
     <string name="campo_contrasena2">Confirme su Contraseña:</string>
     <string name="campo_contrasena2_hint">Vuelva a escribir su contraseña</string>
-
+    <string name="profile_image">Foto de perfil</string>
 
     <string name="boton_registro">Registrarse</string>
     <string name="tv_go_to_register">¿No tienes cuenta? Regístrate!</string>

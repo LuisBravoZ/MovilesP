@@ -11,6 +11,9 @@ data class Usuario(
     val nombre: String,
     val email: String,
     val password: String,
+    val cedula: String ? = null,
+    val telefono: String ? = null,
+    val fechaNacimiento: String ? = null,
     val rol: String
 
     )

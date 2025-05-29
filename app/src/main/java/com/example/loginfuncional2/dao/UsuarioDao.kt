@@ -34,6 +34,10 @@ interface UsuarioDao{
     @Query("SELECT * FROM usuarios WHERE rol != 'Admin'")
     fun obtenerUsuariosNoAdmin(): Flow<List<Usuario>>
 
+    // NUEVO: obtener usuarios por rol Paciente
+    @Query("SELECT * FROM usuarios WHERE rol = 'Paciente'")
+    fun obtenerPacientes(): Flow<List<Usuario>>
+
     // NUEVO: eliminar usuario por id (alias para claridad)
     @Query("DELETE FROM usuarios WHERE id = :id")
     suspend fun eliminarPorId(id: Int)
@@ -43,4 +47,5 @@ interface UsuarioDao{
 
     @Update
     suspend fun actualizar(usuario: Usuario)
+
 }

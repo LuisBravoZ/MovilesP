@@ -21,28 +21,25 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 class MenuActivity : AppCompatActivity() {
-    private lateinit var usuarioAdapter: UsuarioAdapter
-    private lateinit var rvMisCitas: RecyclerView
-    private lateinit var citaAdapter: CitaAdapter
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_menu)
 
         val sessionManager = SessionManager(this)
-        val userId = sessionManager.getUserId()
-        rvMisCitas = findViewById(R.id.rvmisCitas)
-        rvMisCitas.layoutManager = LinearLayoutManager(this)
-
-        val calendarView = findViewById<CalendarView>(R.id.calendarView)
-        val tvFechaSeleccionada = findViewById<TextView>(R.id.tvFechaSeleccionada)
-        var fechaSeleccionada: String = ""
-
 
         val btnLogout = findViewById<Button>(R.id.btnLogout)
         btnLogout.setOnClickListener {
             logout()
         }
+        //mostrar el nombre del usuario en el TextView y el email
+        val tvNombreUsuario = findViewById<TextView>(R.id.tvNombrePaciente)
+        tvNombreUsuario.text = sessionManager.getUserName()
+        val tvEmailUsuario = findViewById<TextView>(R.id.tvEmailPaciente)
+        tvEmailUsuario.text = sessionManager.getUserEmail()
+
+
 
     }
 

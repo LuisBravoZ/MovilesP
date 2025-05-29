@@ -32,7 +32,7 @@ class UsuarioAdapter(
         val btnEditar = view.findViewById<Button>(R.id.btnEditar)
 
         val usuario = usuarios[position]
-        tvNombre.text = "${usuario.nombre} - ${usuario.rol}"
+        tvNombre.text = "${usuario.nombre} \n${usuario.rol}"
         tvEmail.text = usuario.email
 
         btnEliminar.setOnClickListener { onEliminarClick(usuario) }
