@@ -1,4 +1,4 @@
-una aplicacion sensilla la cual es para reservar turnos a un nutricionista
+una aplicacion sencilla la cual es para reservar turnos a un nutricionista
 maneja 3 roles (administrados, paciente, nutricionista)
 //funcion principal del administrados 
 *gestionar la creacion de usuarios
