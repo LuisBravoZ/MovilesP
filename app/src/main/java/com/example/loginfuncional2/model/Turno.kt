@@ -6,10 +6,11 @@ import androidx.room.PrimaryKey
 @Entity(tableName = "turnos")
 data class Turno(
     @PrimaryKey(autoGenerate = true) val id: Int = 0,
-    val idNutricionista: Int,     // Relación con el usuario
-    val fecha: String,            // Ej: "2023-10-01"
-    val diaSemana: String,        // Ej: "Lunes", "Martes"
-    val horaInicio: String,       // Ej: "08:00"
-    val horaFin: String,          // Ej: "09:00"
-    val disponible: Boolean = true
+    val idNutricionista: Int,
+    val fecha: String,
+    val diaSemana: String,
+    val horaInicio: String,
+    val horaFin: String,
+    val disponible: Boolean = true,
+    val idPaciente: Int? = null // Nuevo campo para asociar el turno a un paciente
 )

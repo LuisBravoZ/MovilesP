@@ -7,7 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.loginfuncional2.R
-import com.example.loginfuncional2.adapter.TurnosAdapter.TurnosAdapter
+import com.example.loginfuncional2.adapter.TurnosAdapter
 import com.example.loginfuncional2.database.AppDatabase
 import com.example.loginfuncional2.model.Turno
 import com.example.loginfuncional2.utilidades.SessionManager
@@ -43,13 +43,13 @@ class VerTurnosActivity : AppCompatActivity() {
         val sessionManager = SessionManager(this)
         val idNutricionista = sessionManager.getUserId()
 
-        val formatoFecha = SimpleDateFormat("dd/MM/yy", Locale.getDefault())
-        val formatoHora = SimpleDateFormat("HH:mm", Locale.getDefault())
-        val hoy = formatoFecha.format(Date())
-        val horaActual = formatoHora.format(Date())
+
+//        val formatoFecha = SimpleDateFormat("dd/MM/yy", Locale.getDefault())
+//        val formatoHora = SimpleDateFormat("HH:mm", Locale.getDefault())
+
 
         CoroutineScope(Dispatchers.IO).launch {
-            val listaTurnos = turnoDao.obtenerTurnosActualesPorNutricionista(idNutricionista, hoy, horaActual)
+            val listaTurnos = turnoDao.obtenerTurnosPorNutricionista(idNutricionista)
             runOnUiThread {
                 adapter.actualizarTurnos(listaTurnos)
             }

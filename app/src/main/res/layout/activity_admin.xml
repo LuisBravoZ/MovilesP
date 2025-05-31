@@ -12,7 +12,7 @@
         android:id="@+id/btnLogout"
         android:text="🔓 Cerrar Sesión"
         android:backgroundTint="#E74C3C"
-        android:textColor="@android:color/white"
+        android:textColor="@color/white"
         android:layout_marginTop="20dp"
         android:layout_marginBottom="24dp"
         android:layout_width="match_parent"
@@ -27,35 +27,25 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="20dp"
         android:backgroundTint="@color/black"
-        android:text="👤Agregar Usuario"
+        android:text="👤 Agregar Usuario"
         android:textColor="@android:color/white" />
 
-
-    <!-- Lista de usuarios -->
-
     <TextView
-        android:id="@+id/tituloListaUsuarios"
+        android:id="@+id/tvTitulo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Lista de Usuarios"
-        android:textSize="26sp"
+        android:text="Usuarios registrados"
+        android:textSize="22sp"
         android:textStyle="bold"
-        android:textColor="#2D3436"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginBottom="20dp"
-        android:letterSpacing="0.05"/>
+        android:textColor="@color/black"
+        android:layout_marginBottom="16dp" />
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="2dp"
-        android:background="#00B894"
-        android:layout_marginBottom="16dp"/>
+    <!-- Lista de usuarios -->
     <ListView
         android:id="@+id/listViewUsuarios"
+        android:divider="@android:color/darker_gray"
+        android:dividerHeight="1dp"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"
-        android:divider="#B2BEC3"
-        android:dividerHeight="1dp"
-        android:background="@drawable/bg_listview_rounded"/>
+        android:layout_weight="1" />
 </LinearLayout>

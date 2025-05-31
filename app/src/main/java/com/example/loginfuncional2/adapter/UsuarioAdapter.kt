@@ -1,4 +1,3 @@
-// UsuarioAdapter.kt
 package com.example.loginfuncional2.adapter
 
 import android.content.Context
@@ -16,7 +15,8 @@ class UsuarioAdapter(
     private val usuarios: List<Usuario>,
     private val onEliminarClick: (Usuario) -> Unit,
     private val onEditarClick: (Usuario) -> Unit
-) : BaseAdapter() {
+
+    ) : BaseAdapter() {
 
     override fun getCount(): Int = usuarios.size
     override fun getItem(position: Int): Any = usuarios[position]
@@ -32,7 +32,7 @@ class UsuarioAdapter(
         val btnEditar = view.findViewById<Button>(R.id.btnEditar)
 
         val usuario = usuarios[position]
-        tvNombre.text = "${usuario.nombre} \n${usuario.rol}"
+        tvNombre.text = "${usuario.nombre} - ${usuario.rol}"
         tvEmail.text = usuario.email
 
         btnEliminar.setOnClickListener { onEliminarClick(usuario) }

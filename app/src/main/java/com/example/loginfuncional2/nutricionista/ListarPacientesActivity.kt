@@ -1,5 +1,6 @@
 package com.example.loginfuncional2.nutricionista
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.ListView
 import android.widget.Toast
@@ -26,6 +27,13 @@ class ListarPacientesActivity : AppCompatActivity() {
         cargarUsuarios()
 
 
+    }
+    override fun onBackPressed() {
+        super.onBackPressed()
+        // Si quieres regresar al panel del nutricionista al presionar atrás
+        val intent = Intent(this, NutricionistaActivity::class.java)
+        startActivity(intent)
+        finish()
     }
 
     private fun cargarUsuarios() {

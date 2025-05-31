@@ -1,6 +1,5 @@
 package com.example.loginfuncional2.utilidades
 
-
 import org.mindrot.jbcrypt.BCrypt
 
 object Seguridad {

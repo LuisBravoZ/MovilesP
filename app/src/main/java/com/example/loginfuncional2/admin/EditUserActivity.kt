@@ -3,9 +3,8 @@ package com.example.loginfuncional2.admin
 import android.content.Intent
 import android.os.Bundle
 import android.widget.*
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import com.example.loginfuncional2.admin.AdminActivity
+import com.example.loginfuncional2.AdminActivity
 import com.example.loginfuncional2.R
 import com.example.loginfuncional2.database.AppDatabase
 import com.example.loginfuncional2.model.Usuario
@@ -20,6 +19,7 @@ class EditUserActivity : AppCompatActivity() {
     private lateinit var etNombre: EditText
     private lateinit var etEmail: EditText
     private lateinit var etPassword: EditText
+    private lateinit var etPassword2: EditText
     private lateinit var spinnerRol: Spinner
     private lateinit var btnGuardar: Button
     private lateinit var btnAtras: Button
@@ -32,6 +32,7 @@ class EditUserActivity : AppCompatActivity() {
         etNombre = findViewById(R.id.etNombre)
         etEmail = findViewById(R.id.etEmail)
         etPassword = findViewById(R.id.etPassword)
+        etPassword2 = findViewById(R.id.etPassword2)
         spinnerRol = findViewById(R.id.spinnerRol)
         btnGuardar = findViewById(R.id.btnGuardar)
         btnAtras = findViewById(R.id.btnAtras)
@@ -48,7 +49,7 @@ class EditUserActivity : AppCompatActivity() {
         cargarDatosUsuario()
 
         btnGuardar.setOnClickListener { actualizarUsuario() }
-        btnAtras.setOnClickListener{ goToAtras()}
+        btnAtras.setOnClickListener{ startActivity(Intent(this, AdminActivity::class.java)); finish()}
     }
 
     private fun cargarDatosUsuario() {
@@ -69,35 +70,20 @@ class EditUserActivity : AppCompatActivity() {
         val nombre = etNombre.text.toString().trim()
         val email = etEmail.text.toString().trim()
         val password = etPassword.text.toString().trim()
+        val password2 = etPassword2.text.toString().trim()
         val rol = spinnerRol.selectedItem.toString()
 
-        if (nombre.isEmpty()) {
-            etNombre.error = "Campo requerido"
-            return
-        }
+        if (nombre.isEmpty()) { etNombre.error = "Campo requerido"; return }
+        if (nombre.length < 8) { etNombre.error = "El nombre debe tener al menos 8 caracteres"; return }
+        if (nombre.any { it.isDigit() }) { etNombre.error = "El nombre no debe contener números"; return }
 
-        if (nombre.length < 8) {
-            etNombre.error = "El nombre debe tener al menos 8 caracteres"
-            return
-        }
-        if (nombre.any { it.isDigit() }) {
-            etNombre.error = "El nombre no debe contener números"
-            return
-        }
+        if (email.isEmpty()) { etEmail.error = "Campo requerido"; return }
+        if (!android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) { etEmail.error = "Ingrese un correo válido"; return }
 
-        if (email.isEmpty()) {
-            etEmail.error = "Campo requerido"
-            return
-        }
-
-        if (!android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-            etEmail.error = "Ingrese un correo válido"
-            return
-        }
+        if (password != password2) { etPassword2.error = "Las contraseñas no coinciden"; etPassword2.requestFocus(); return }
 
         CoroutineScope(Dispatchers.IO).launch {
             val dao = AppDatabase.getDatabase(this@EditUserActivity).usuarioDao()
-
             val usuarioConMismoEmail = dao.buscarporEmail(email)
             val usuarioActual = dao.obtenerUsuarioPorId(usuarioId)
 
@@ -126,11 +112,4 @@ class EditUserActivity : AppCompatActivity() {
             }
         }
     }
-
-    private  fun goToAtras(){
-        val regreso = Intent(this, AdminActivity::class.java)
-        startActivity(regreso)
-        finish()
-    }
-
 }

@@ -1,10 +1,9 @@
-package com.example.loginfuncional2.adapter.TurnosAdapter
+package com.example.loginfuncional2.adapter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
-import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.example.loginfuncional2.model.Turno
 import com.example.loginfuncional2.R

@@ -2,7 +2,6 @@ package com.example.loginfuncional2.dao
 
 import androidx.room.*
 import com.example.loginfuncional2.model.Turno
-import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface TurnoDao {
@@ -12,9 +11,6 @@ interface TurnoDao {
 
     @Insert
     suspend fun insertarTurnos(turnos: List<Turno>)
-
-//    @Query("SELECT * FROM turnos WHERE idNutricionista = :idNutricionista")
-//    fun obtenerTurnosPorNutricionista(idNutricionista: Int): Flow<List<Turno>>
 
     @Query("SELECT * FROM turnos WHERE idNutricionista = :idNutricionista AND diaSemana = :dia AND horaInicio = :hora")
     suspend fun obtenerTurnoPorHorario(idNutricionista: Int, dia: String, hora: String): Turno?
@@ -42,4 +38,7 @@ interface TurnoDao {
 
     @Query("SELECT * FROM turnos WHERE idNutricionista = :idNutricionista AND (fecha > :hoy OR (fecha = :hoy AND horaFin > :horaActual))")
     fun obtenerTurnosActualesPorNutricionista(idNutricionista: Int, hoy: String, horaActual: String): List<Turno>
+
+    @Query("SELECT * FROM turnos WHERE idPaciente = :pacienteId LIMIT 1")
+    suspend fun obtenerTurnoPorPaciente(pacienteId: Int): Turno?
 }

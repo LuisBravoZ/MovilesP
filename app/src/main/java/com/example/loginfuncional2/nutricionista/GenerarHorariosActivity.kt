@@ -173,10 +173,6 @@ class GenerarHorariosActivity : AppCompatActivity() {
         val horaFin = formatoHora.parse(horaFinStr)!!
         val descansoInicio = formatoHora.parse(descansoInicioStr)!!
         val descansoFin = formatoHora.parse(descansoFinStr)!!
-        if (fechaInicio == null || fechaFin == null || horaInicio == null || horaFin == null || descansoInicio == null || descansoFin == null) {
-            Toast.makeText(this, "Formato de fecha u hora incorrecto", Toast.LENGTH_SHORT).show()
-            return
-        }
 
         val sessionManager = SessionManager(this)
         val idNutricionista = sessionManager.getUserId()
@@ -191,30 +187,64 @@ class GenerarHorariosActivity : AppCompatActivity() {
             val ahora = Calendar.getInstance()
 
             while (!calendarioDia.time.after(fechaFin)) {
-                val diaSemana = calendarioDia.getDisplayName(Calendar.DAY_OF_WEEK, Calendar.LONG, Locale("es")) ?: "Día"
-                val calInicio = Calendar.getInstance().apply {
-                    time = horaInicio
-                    set(Calendar.YEAR, calendarioDia.get(Calendar.YEAR))
-                    set(Calendar.MONTH, calendarioDia.get(Calendar.MONTH))
-                    set(Calendar.DAY_OF_MONTH, calendarioDia.get(Calendar.DAY_OF_MONTH))
-                }
-                val calFin = Calendar.getInstance().apply {
-                    time = horaFin
-                    set(Calendar.YEAR, calendarioDia.get(Calendar.YEAR))
-                    set(Calendar.MONTH, calendarioDia.get(Calendar.MONTH))
-                    set(Calendar.DAY_OF_MONTH, calendarioDia.get(Calendar.DAY_OF_MONTH))
-                }
-                val calDescansoInicio = Calendar.getInstance().apply { time = descansoInicio }
-                val calDescansoFin = Calendar.getInstance().apply { time = descansoFin }
+                val diaSemanaInt = calendarioDia.get(Calendar.DAY_OF_WEEK)
+                // Saltar sábado (7) y domingo (1)
+                if (diaSemanaInt != Calendar.SATURDAY && diaSemanaInt != Calendar.SUNDAY) {
 
-                while (calInicio.before(calFin)) {
-                    // Validar que el turno no sea en el pasado
-                    if (calInicio.after(ahora)) {
-                        val horaActual = calInicio.time
-                        if (horaActual.before(calDescansoInicio.time) || horaActual.after(calDescansoFin.time)) {
-                            val horaInicioStrTurno = formatoHora.format(horaActual)
-                            calInicio.add(Calendar.HOUR_OF_DAY, 1)
-                            val horaFinStrTurno = formatoHora.format(calInicio.time)
+                    val diaSemana = calendarioDia.getDisplayName(
+                        Calendar.DAY_OF_WEEK,
+                        Calendar.LONG,
+                        Locale("es")
+                    ) ?: "Día"
+
+                    val calInicio = Calendar.getInstance().apply {
+                        time = horaInicio
+                        set(Calendar.YEAR, calendarioDia.get(Calendar.YEAR))
+                        set(Calendar.MONTH, calendarioDia.get(Calendar.MONTH))
+                        set(Calendar.DAY_OF_MONTH, calendarioDia.get(Calendar.DAY_OF_MONTH))
+                    }
+
+                    val calFin = Calendar.getInstance().apply {
+                        time = horaFin
+                        set(Calendar.YEAR, calendarioDia.get(Calendar.YEAR))
+                        set(Calendar.MONTH, calendarioDia.get(Calendar.MONTH))
+                        set(Calendar.DAY_OF_MONTH, calendarioDia.get(Calendar.DAY_OF_MONTH))
+                    }
+
+                    val calDescansoInicio = Calendar.getInstance().apply {
+                        time = descansoInicio
+                        set(Calendar.YEAR, calendarioDia.get(Calendar.YEAR))
+                        set(Calendar.MONTH, calendarioDia.get(Calendar.MONTH))
+                        set(Calendar.DAY_OF_MONTH, calendarioDia.get(Calendar.DAY_OF_MONTH))
+                    }
+
+                    val calDescansoFin = Calendar.getInstance().apply {
+                        time = descansoFin
+                        set(Calendar.YEAR, calendarioDia.get(Calendar.YEAR))
+                        set(Calendar.MONTH, calendarioDia.get(Calendar.MONTH))
+                        set(Calendar.DAY_OF_MONTH, calendarioDia.get(Calendar.DAY_OF_MONTH))
+                    }
+
+                    while (calInicio.before(calFin)) {
+                        val calInicioTurno = calInicio.clone() as Calendar
+                        val calFinTurno = (calInicio.clone() as Calendar).apply {
+                            add(Calendar.HOUR_OF_DAY, 1)
+                        }
+
+                        // Verificar que no sea en el pasado
+                        if (calInicioTurno.after(ahora)) {
+                            // Verificar solapamiento con el descanso
+                            val seSolapaConDescanso =
+                                calInicioTurno.before(calDescansoFin) &&
+                                        calFinTurno.after(calDescansoInicio)
+
+                            if (seSolapaConDescanso) {
+                                calInicio.add(Calendar.HOUR_OF_DAY, 1)
+                                continue
+                            }
+
+                            val horaInicioStrTurno = formatoHora.format(calInicioTurno.time)
+                            val horaFinStrTurno = formatoHora.format(calFinTurno.time)
                             val fechaTurno = formatoFecha.format(calendarioDia.time)
 
                             val existe = turnoDao.existeTurno(
@@ -223,6 +253,7 @@ class GenerarHorariosActivity : AppCompatActivity() {
                                 horaInicioStrTurno,
                                 horaFinStrTurno
                             )
+
                             if (!existe) {
                                 val turno = Turno(
                                     fecha = fechaTurno,
@@ -233,10 +264,8 @@ class GenerarHorariosActivity : AppCompatActivity() {
                                 )
                                 turnosAGuardar.add(turno)
                             }
-                        } else {
-                            calInicio.add(Calendar.HOUR_OF_DAY, 1)
                         }
-                    } else {
+
                         calInicio.add(Calendar.HOUR_OF_DAY, 1)
                     }
                 }
@@ -246,6 +275,7 @@ class GenerarHorariosActivity : AppCompatActivity() {
             if (turnosAGuardar.isNotEmpty()) {
                 turnoDao.insertarTurnos(turnosAGuardar)
             }
+
             runOnUiThread {
                 Toast.makeText(
                     this@GenerarHorariosActivity,
@@ -268,9 +298,9 @@ class GenerarHorariosActivity : AppCompatActivity() {
     }
     private fun goToNutricionistaActivity() {
         // Aquí puedes iniciar la actividad principal o la actividad que desees
-         val intent = Intent(this, NutricionistaActivity::class.java)
-         startActivity(intent)
-         finish()
+        val intent = Intent(this, NutricionistaActivity::class.java)
+        startActivity(intent)
+        finish()
     }
 
 }
